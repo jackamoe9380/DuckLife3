@@ -1,11 +1,54 @@
-<html>
-  <head>
-    <title>DuckLife3</title>
-  </head>
-  <body>
-    <object>
-        <embed src="DuckLife3.swf" width="640" height="480" />
-    </object>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duck Life 3</title>
+
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #game-container {
+            width: min(100vw, calc(100vh * 4 / 3));
+            height: min(100vh, calc(100vw * 3 / 4));
+        }
+
+        #game-container object,
+        #game-container embed,
+        #game-container ruffle-player {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container"></div>
+
+    <script>
+        window.addEventListener("load", () => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+
+            document.getElementById("game-container")
+                .appendChild(player);
+
+            player.load({
+                url: "DuckLife3.swf"
+            });
+        });
+    </script>
+
 </body>
 </html>
